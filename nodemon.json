@@ -1,6 +1,14 @@
 {
-    "watch": ["src"],
+    "watch": [
+        "src"
+    ],
     "ext": ".ts,.js",
-    "ignore": [],
-    "exec": "ts-node ./src/server.ts"
+    "ignore": [
+        ".git",
+        ".gitignore",
+        "package-lock.json",
+        "build",
+        ".vscode"
+    ],
+    "exec": " ts-node ./src/server.ts"
 }
