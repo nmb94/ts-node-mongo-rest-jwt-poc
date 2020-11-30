@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController";
+import passport from "passport";
 
 export class UserRoutes {
     router: Router;
@@ -12,6 +13,6 @@ export class UserRoutes {
     
     routes(): void {
         this.router.post(`/register`, this.userController.registerUser);
-        this.router.post(`/login`, this.userController.authenticateUser);
+        this.router.post(`/login`, passport.authenticate(`login`) , this.userController.authenticateUser);
     }
 }

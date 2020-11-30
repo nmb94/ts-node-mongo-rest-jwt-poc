@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import compression from "compression";
+import passport from "passport";
 
 import { MONGO_URI, PORT } from "./constants";
 import { ProductRoutes } from "./routes/productRoutes";
@@ -22,6 +23,10 @@ class Server {
         this.app.use(express.urlencoded({ extended: false }));
         this.app.use(compression());
         this.app.use(cors());
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
+        passport.serializeUser((user, done) => done(null, user));
+        passport.deserializeUser((user, done) => done(null, user));
     }
 
     private mongo() {

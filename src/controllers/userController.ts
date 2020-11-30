@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
-import passport from "passport";
 
 import "../auth/passportHandler";
 import { User } from "../models/user";
@@ -34,16 +33,12 @@ export class UserController {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public authenticateUser = (req: Request, res: Response, next: NextFunction): any => {
+    public authenticateUser = (req: Request, res: Response): any => {
         try {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            passport.authenticate(`local`, (err, user, info) => {
-                if (err) return next(err);
-                if (!user) {
-                    return res.status(401).json({ status: `error`, code: `unauthorized` });
-                }
-                res.status(200).send({ token: jwt.sign({ username: user.username }, JWT_SECRET) });
-            });
+            if (req.isAuthenticated()) {
+                return res.status(200).send({ token: jwt.sign({ username: req.body.username }, JWT_SECRET) });
+            }
+            res.status(401).json({ status: `error`, code: `unauthorized` });
         } catch (error) {
             console.log(`An error occurred while authenticating a user:`);
             console.log(error);
