@@ -4,4 +4,4 @@ COPY . .
 RUN npm install --only=production
 RUN npm run build
 EXPOSE 4000
-CMD [ "npm", "run", "prod" ]
+CMD [ "npm", "run", "start" ]

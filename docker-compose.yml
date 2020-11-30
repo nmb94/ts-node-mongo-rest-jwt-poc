@@ -1,15 +1,17 @@
-version: "3.7"
+version: "3.8"
 
 services:
     app:
         build:
             context: .
-    environment:
-        DB_MONGO_URI: mongodb://mongo:27017/node_ts_poc
-    depends_on:
-        - mongo
-    ports:
-        - '4000:4000'
+        environment:
+            MONGO_URI: mongodb://mongo/node_ts_poc
+            JWT_SECRET: thomas-anderson-neo
+            PORT: 4000
+        depends_on:
+            - mongo
+        ports:
+            - '4000:4000'
 
     mongo:
         image: mongo

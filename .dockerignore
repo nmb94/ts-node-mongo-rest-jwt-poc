@@ -12,3 +12,4 @@ npm-debug.log
 build
 package-lock.json
 .git*
+.env
