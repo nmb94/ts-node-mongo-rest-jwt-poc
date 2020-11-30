@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+    app:
+        build:
+            context: .
+    environment:
+        DB_MONGO_URI: mongodb://mongo:27017/node_ts_poc
+    depends_on:
+        - mongo
+    ports:
+        - '4000:4000'
+
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        volumes:
+            - data-volume:/data/db
+
+volumes:
+    data-volume:

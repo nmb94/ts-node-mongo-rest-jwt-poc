@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import compression from "compression";
 
-import { MONGO_DB, MONGO_DOMAIN, MONGO_PORT, PORT } from "./constants";
+import { MONGO_URI, PORT } from "./constants";
 import { ProductRoutes } from "./routes/productRoutes";
 import { UserRoutes } from "./routes/userRoutes";
 
@@ -38,8 +38,7 @@ class Server {
             console.log(error);
         });
         mongoose
-            .connect(
-                `mongodb://${MONGO_DOMAIN}:${MONGO_PORT}/${MONGO_DB}`,
+            .connect(MONGO_URI,
                 {
                     useNewUrlParser: true,
                     keepAlive: true,

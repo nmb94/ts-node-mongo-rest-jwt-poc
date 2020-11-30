@@ -1,0 +1,14 @@
+# Docker configuration
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# NPM
+node_modules
+npm-debug.log
+
+# Other
+.vscode
+build
+package-lock.json
+.git*
